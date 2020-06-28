@@ -193,6 +193,7 @@ You can write CCTV-scheme just like other schemes. But there're some differences
 + `elsee`: represents `else` in scheme
 + `andd`: represents `and` in scheme
 + `orr`: represents `or` in scheme
++ `dot`: represents `.` in scheme
 
 
 
@@ -216,16 +217,12 @@ You can write CCTV-scheme just like other schemes. But there're some differences
   (lambda (head . tail) tail)
   ```
 
-  cannot be transform to CCTV-scheme directly. Instead, you can use `let` binding to get each argument:
+  is equivalent to:
 
   ```C++
-  _<lambda, V(args),
-  	_<let, _<
-  		_<V(head), _<car, args>>,
-  		_<V(tail), _<cdr, args>>>,
-  		tail>>
+  _<lambda, _<V(head), dot, V(tail)>, tail>
   ```
-
+  
 + Cannot use `'` to abbreviate `quote`. Instead, you should use `quote` explicitly.
 
 

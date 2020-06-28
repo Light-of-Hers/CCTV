@@ -1,3 +1,5 @@
 /cmake-build-debug
 /.vscode
 /.idea
+/CMakeLists.txt
+*.out

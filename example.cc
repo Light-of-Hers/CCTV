@@ -22,13 +22,13 @@ int main() {
      */
     using fib = eval<
         _<lambda, _<V(n)>,
-          _<letrec,
-            _<
-                _<V(iter), _<lambda, _<V(n), V(a), V(b)>,
-                             _<iff, _<is_eq, n, N(0) >,
-                               a,
-                               _<iter, _<sub, n, N(1) >, b, _<add, a, b>>>>>>,
-            _<iter, n, N(0), N(1)>>>
+            _<letrec,
+                _<
+                    _<V(iter), _<lambda, _<V(n), V(a), V(b)>,
+                        _<iff, _<is_eq, n, N(0) >,
+                            a,
+                            _<iter, _<sub, n, N(1) >, b, _<add, a, b>>>>>>,
+                _<iter, n, N(0), N(1)>>>
     >;
     // (fib 10)
     using expr = eval<_<fib, N(10)>>;
@@ -78,19 +78,19 @@ int main() {
      */
     using expr = eval<
         _<letrec,
-          _<
-              _<V(is_even), _<lambda, _<V(n)>,
-                              _<iff, _<is_eq, n, V(zero)>,
-                                B(true),
-                                _<V(is_odd), _<V(sub1), n>>>>>,
-              _<V(one), N(1) >,
-              _<V(is_odd), _<lambda, _<V(n)>,
-                             _<iff, _<is_eq, n, V(zero)>,
-                               B(false),
-                               _<is_even, _<V(sub1), n>>>>>,
-              _<V(sub1), _<lambda, _<V(n)>, _<sub, n, one>>>,
-              _<V(zero), _<sub1, one>>>,
-          _<is_even, N(12)>>
+            _<
+                _<V(is_even), _<lambda, _<V(n)>,
+                    _<iff, _<is_eq, n, V(zero)>,
+                        B(true),
+                        _<V(is_odd), _<V(sub1), n>>>>>,
+                _<V(one), N(1) >,
+                _<V(is_odd), _<lambda, _<V(n)>,
+                    _<iff, _<is_eq, n, V(zero)>,
+                        B(false),
+                        _<is_even, _<V(sub1), n>>>>>,
+                _<V(sub1), _<lambda, _<V(n)>, _<sub, n, one>>>,
+                _<V(zero), _<sub1, one>>>,
+            _<is_even, N(12)>>
     >;
     assert_eq<expr, B(true) >();
     runtime<expr>::output(std::cout) << std::endl; // #t
@@ -111,16 +111,16 @@ int main() {
      */
     using expr = eval<
         _<letrec,
-          _<_<V(fs), _<cons,
-                       _<lambda, _<V(n)>,
-                         _<iff, _<is_eq, n, N(0) >,
-                           B(true),
-                           _<_<cdr, fs>, _<sub, n, N(1)>>>>,
-                       _<lambda, _<V(n)>,
-                         _<iff, _<is_eq, n, N(0) >,
-                           B(false),
-                           _<_<car, fs>, _<sub, n, N(1)>>>>>>>,
-          _<_<car, fs>, N(12)>>
+            _<_<V(fs), _<cons,
+                _<lambda, _<V(n)>,
+                    _<iff, _<is_eq, n, N(0) >,
+                        B(true),
+                        _<_<cdr, fs>, _<sub, n, N(1)>>>>,
+                _<lambda, _<V(n)>,
+                    _<iff, _<is_eq, n, N(0) >,
+                        B(false),
+                        _<_<car, fs>, _<sub, n, N(1)>>>>>>>,
+            _<_<car, fs>, N(12)>>
     >;
     assert_eq<expr, B(true) >();
     runtime<expr>::output(std::cout) << std::endl; // #t
