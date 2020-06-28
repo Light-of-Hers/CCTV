@@ -60,7 +60,7 @@ int main() {
     runtime<expr>::output(std::cout) << std::endl; // (1 3 2 4)
   }
   {
-    /*
+    /* mutual recursive 1
      * (letrec
      *   (
      *     (even? (lambda (n)
@@ -96,7 +96,7 @@ int main() {
     runtime<expr>::output(std::cout) << std::endl; // #t
   }
   {
-    /*
+    /* mutual recursive 2
      * (letrec
      *   ((fs (cons
      *          (lambda (n)
@@ -124,5 +124,21 @@ int main() {
     >;
     assert_eq<expr, B(true) >();
     runtime<expr>::output(std::cout) << std::endl; // #t
+  }
+  {
+    /* dot
+     * (let
+     *   (
+     *     (head (lambda (head . tail) head))
+     *   (head (list 1 2 #f)))
+     */
+    using expr = eval<
+        _<let,
+            _<
+                _<V(head), _<lambda, _<V(head), dot, V(tail)>, head>>>,
+            _<head, _<list, N(1), N(2), B(false)>>>
+    >;
+    assert_eq<expr, N(1) >();
+    runtime<expr>::output(std::cout) << std::endl; // 1
   }
 }
