@@ -136,7 +136,7 @@ int main() {
         _<let,
             _<
                 _<V(head), _<lambda, _<V(head), dot, V(tail)>, head>>>,
-            _<head, _<list, N(1), N(2), B(false)>>>
+            _<head, N(1), N(2), B(false)>>
     >;
     assert_eq<expr, N(1) >();
     runtime<expr>::output(std::cout) << std::endl; // 1
